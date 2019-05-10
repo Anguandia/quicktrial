@@ -2,7 +2,6 @@
   "name": "quicktrial",
   "version": "0.0.0",
   "main": "app.js"
-  "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
@@ -23,7 +22,6 @@
     "regex": "^0.1.1"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
