@@ -1,0 +1,11 @@
+var a = 'mike'.split("");
+var b = 'anguandiakuku'.split('');
+var c = b.filter(i => a.includes(i));
+require('regex');
+let re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+let users = 'anguandia'.split('');
+let user = users.find((target) => target === 'x');
+// console.log(/loans/.test('/users?ishjhkjh'));
+let x ={name: 'mike', sex: 'm', age:50};
+let y = (({name, age})=>({name, age}))(x);
+console.log(y);
