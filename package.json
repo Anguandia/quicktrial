@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node --exec babel-node --presets babel-preset-env ./bin/www",
     "dev": "nodemon --exec babel-node --presets babel-preset-env ./app.js",
     "lint": "./node_modules/.bin/eslint",
     "test": "mocha';"
