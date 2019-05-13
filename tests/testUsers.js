@@ -10,7 +10,7 @@ let testUsers = testData.test_users;
 
 chai.use(chaiHttp);
 
-describe.only('test user end points', () => {
+describe('test user end points', () => {
     beforeEach((done) => {
         // create three test users for each test
         // testUsers.forEach((user) => chai.request(app).post('/api/v1/auth/signup').send(user).end());
@@ -106,7 +106,7 @@ describe.only('test user end points', () => {
                 });
             });
             describe('Registration should fail', () => {
-                it('should fail registration - no email', (done) => {
+                it.skip('should fail registration - no email', (done) => {
                     // test registration fails if no email provided
                     delete testUsers[0].email;
                     chai.request(app)
@@ -130,7 +130,7 @@ describe.only('test user end points', () => {
                         done();
                     });
                 });
-                it('should fail - invalid/missing field(emai)', (done) => {
+                it.skip('should fail - invalid/missing field(emai)', (done) => {
                     // test registration fails if invalid email provided
                     // replace the keyname email with emai
                     // delete Object.assign(testUsers[0], {emai: testUsers[0].email}).email;

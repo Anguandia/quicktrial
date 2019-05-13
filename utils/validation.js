@@ -6,7 +6,6 @@ const loan = require('../models/loan');
 const signin = user.signin;
 const signup = user.signup;
 const verify = user.verify;
-// const specs = user.specs;
 const apply = loan.loan;
 const repayment = loan.payment;
 const approve = loan.approve;
@@ -18,23 +17,21 @@ function validateEmail(email, next){
 
 exports.validate = function(req, res, next){
     let must = required(req);
-    let flag;
+    let resp;
     for(let i=0; i<must.length; i++){
-        if(Object.keys(req.body).indexOf(must[i])==-1){
-            flag = true;
-            res.status(400).json({status: 400, error: `${must[i]} missing`});
+        if(!must[i] in req.body){
+            rep = {status: 400, error: `${must[i]} missing`};
         } else if(req.body[must[i]]==''){
-            flag = true;
-            res.status(400).json({status: 400, error: `${must[i]} required`});
+            resp = {status: 400, error: `${must[i]} required`};
         } else if(validateType(req)){
-            flag = true;
-            res.status(400).json({status: 400, error: validateType(req, res)});
+            resp = {status: 400, error: validateType(req, res)};
         } else if(must[i]==='email' && !validateEmail(req.body[must[i]])){
-            flag = true;
-            res.status(400).json({status: 400, error: 'invalid email'});
+            resp = {status: 400, error: 'invalid email'};
         }
     }
-    if(!flag){
+    if(resp){
+        res.status(400).json(resp);
+    } else {
         next();
     }
 };
@@ -47,7 +44,7 @@ function required(req){
         res = signin;
     } else if(req.url == '/:email/verify'){
         res = verify;
-    } else if(req.url == '/loans'){
+    } else if(req.url == '/'){
         res = apply;
     } else if(req.url == '/loans/:loanId'){
         res = approve;
@@ -58,8 +55,9 @@ function required(req){
 }
 
 function validateType(req){
-    let resp = '';
-    let specs =  /loans/.test(req.url)?loan.specs: user.specs;
+    let resp = '', specs;
+    let patterns = [/signup/, /signin/, /verify/];
+    specs =  patterns.some((pat) => pat.test(req.url))?user.specs: loan.specs;
     for(let key in req.body){
         if(!(Object.keys(specs).includes(key))){
             resp += `, unknown field ${key}`;
@@ -70,8 +68,11 @@ function validateType(req){
         else if(specs.key =='Integer' && !parseInt(req.body.key)){
             resp += `, ${key} should be an integer`;
         }
-        else if(typeof(req.body[key]) !== specs[key]){
+        else if(specs.key=='string' && typeof(req.body.key) !== 'string'){
             resp += `, ${key} should be a ${specs[key]}`;
+        }
+        else {
+            resp = '';
         }
     }
     if(resp){

@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node --presets babel-preset-env ./app.js",
-    "lint": "./node_modules/.bin/eslint",
-    "test": "mocha';"
+    "test": "mocha --require babel-register tests/*.js --exit",
+    "dev": "nodemon --exec babel-node --presets babel-preset-env ./server.js",
+    "lint": "./node_modules/.bin/eslint"
   },
   "dependencies": {
     "async": "^2.6.2",
@@ -13,11 +13,9 @@
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "express-validator": "^5.3.1",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.0",
-    "pug": "^2.0.3",
     "regex": "^0.1.1"
   },
   "devDependencies": {
