@@ -5,16 +5,16 @@ const validation = require('../utils/validation');
 const auth = require('../utils/auth');
 
 // post request for creating a loan
-router.post('/', auth.authClient, validation.validate, loan_controller.create);
+router.post('/', auth.authClient, loan_controller.create);
 
 // post request for loan repayment
-router.post('/:loanId/repayment', auth.authAdmin, validation.validate, loan_controller.repay);
+router.post('/:loanId/repayment', validation.validate, loan_controller.repay);
 
 // approve or reject a loan application
-router.patch('/:loanId', auth.authAdmin, validation.validate, loan_controller.approve);
+router.patch('/:loanId', validation.validate, loan_controller.approve);
 
 // get a specific loan
-router.get('/:loanId', auth.authOwner, loan_controller.detail);
+router.get('/:loanId', loan_controller.detail);
 
 // get all current loans
 // router.get('/?status=approved&repaid=false', loan_controller.selection);
