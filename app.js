@@ -93,4 +93,4 @@ app.use('/api/v1/loans', loansRouter);
 //   res.render('error');
 // });
 app.listen(port, () => console.log(`server running on port ${port}`));
-export default app;
+module.exports = app;
