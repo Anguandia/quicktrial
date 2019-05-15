@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const user_controller = require('../controllers/userController');
-// const validation = require('../utils/validation');
+import user_controller from '../controllers/userController';
+// import validation from '../utils/validation';
 
 /* GET users' listing. */
 router.get('/', user_controller.user_list);
@@ -15,4 +15,4 @@ router.delete('/:email', user_controller.del);
 //route to display a particular user's details
 router.get('/:email', user_controller.details);
 
-module.exports = router;
+export default router;

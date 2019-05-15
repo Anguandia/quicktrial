@@ -1,6 +1,6 @@
 // // import record object field specs and required listings
-// const user = require('../models/user');
-// const loan = require('../models/loan');
+// const user from '../models/user';
+// const loan from '../models/loan';
 
 // // assign required lists to routes
 // const signin = user.signin;
@@ -82,16 +82,16 @@
 // }
 
 // import record object field specs and required listings
-const user = require('../models/user');
-const loan = require('../models/loan');
+import {signin, signup, verify, approve, loan as apply, payment as repayment} from '../models/user';
+import loan from '../models/loan';
 
 // assign required lists to routes
-const signin = user.signin;
-const signup = user.signup;
-const verify = user.verify;
-const apply = loan.loan;
-const repayment = loan.payment;
-const approve = loan.approve;
+// const signin = user.signin;
+// const signup = user.signup;
+// const verify = user.verify;
+// const apply = loan.loan;
+// const repayment = loan.payment;
+// const approve = loan.approve;
 
 function validateEmail(email, next){
     let re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;

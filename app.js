@@ -47,7 +47,7 @@
 // module.exports = app;
 
 // var createError = require('http-errors');
-import {express} from 'express';
+import express from 'express';
 // var path = require('path');
 // var cookieParser = require('cookie-parser');
 import logger from 'morgan';

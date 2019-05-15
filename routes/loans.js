@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const loan_controller = require('../controllers/loanController');
-const validation = require('../utils/validation');
-// const auth = require('../utils/auth');
+import loan_controller from '../controllers/loanController';
+import validation from '../utils/validation';
+// import auth from '../utils/auth';
 
 // post request for creating a loan
 router.post('/', validation.validate, loan_controller.create);
@@ -28,4 +28,4 @@ router.get('/', loan_controller.list);
 // get a specific loan's repayment history
 router.get('/:loanId/repayments', loan_controller.log);
 
-module.exports = router;
+export default router;
