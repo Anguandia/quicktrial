@@ -1,9 +1,9 @@
-import encrypt from 'crypto';
-import token from 'jsonwebtoken';
-// let secret from '../config').secret;
-import users from './users';
+let encrypt = require('crypto');
+let token = require('jsonwebtoken');
+// let secret = require('../config').secret;
+let users = require('./users');
 
-export const User = class User{
+exports.User = class User{
     constructor(firstName, lastName, email, password, hash, salt,
         isAdmin=true, status='unverified', tel='',
     ){
@@ -69,7 +69,7 @@ export const User = class User{
 exports.users = [];
 
 // define and export valid user property specifications to be validated against
-export const specs = {
+exports.specs = {
     'id' : 'integer',
     'email' : 'string',
     'firstName' : 'string',
@@ -83,14 +83,14 @@ export const specs = {
 };
 
 // declare and export required user fields for given routes for use in validation
-export const signup = [
+exports.signup = [
     'email', 'firstName', 'lastName', 'password', 'address',
 ];
 
-export const signin = [
+exports.signin = [
     'email', 'password'
 ];
 
-export const verify = [
+exports.verify = [
     'email', 'status'
 ];

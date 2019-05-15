@@ -1,8 +1,7 @@
-import users from '../models/users';
-import {User} from '../models/user';
-// let async from 'async';
+const users = require('../models/users');
+const User = require('../models/user').User;
+// let async = require('async');
 
-// const User = _User.User;
 //helpers
 // let val = function(arr, msg='^ is required'){
 //     let errors = [];
@@ -17,12 +16,12 @@ import {User} from '../models/user';
 // }
 
 //get a list of all users
-export const user_list = function(req, res){
+exports.user_list = function(req, res){
     res.status(200).json({status: 200, data: users});
 };
 
 //handle post request for signup
-export const signup = function(req, res, next){
+exports.signup = function(req, res, next){
     let data = req.body;
     let user = new User();
     Object.assign(user, data);
@@ -38,7 +37,7 @@ export const signup = function(req, res, next){
 };
 
 //handle signin post request
-export const signin = function(req, res){
+exports.signin = function(req, res){
     // check if email and paassword key names in request
     // for(let key of ['email', 'password']){
     //     if(Object.keys(req.body).indexOf(key)==-1){
@@ -56,12 +55,12 @@ export const signin = function(req, res){
 };
 
 //hanle signout post request
-export const signout = function(req, res){
+exports.signout = function(req, res){
     // res.redirect('/users/signin?msg=signout successful')
 };
 
 //handle user update post request
-export const update = function(req, res){
+exports.update = function(req, res){
     let data = req.body;
     let user = users.find((target) => target.email === req.params.email);
     if(!user){
@@ -77,7 +76,7 @@ export const update = function(req, res){
 };
 
 //handle user deletion post request
-export const del = function(req, res){
+exports.delete = function(req, res){
     let user = users.find((target) => target.email === req.params.email);
     if(!user){
         res.status(404).json({status: 404, error: 'user does not exist'});
@@ -87,13 +86,13 @@ export const del = function(req, res){
 };
 
 //display a particular user's profile page
-export const details = function(req, res){
+exports.details = function(req, res){
     let user = users.find((target) => target.email === req.params.email);
     if(!user){
         res.status(404).json({status: 404, error: `user with email ${req.params.email} does not exist`});
     } else {
         // filter out undisplay-worthy properties of user by estructuring
-        // import {hash, salt, ...filtered} = user;
+        // const {hash, salt, ...filtered} = user;
         res.status(200).json({status: 200, data: user});
     }
 };

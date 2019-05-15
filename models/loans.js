@@ -1,3 +1,3 @@
-const loans = [];
+let loans = [];
 
-export default loans;
+module.exports = loans;

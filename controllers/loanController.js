@@ -1,10 +1,11 @@
-import loans from '../models/loans';
-import repayments from '../models/repayments';
-import {Loan} from '../models/loan';
-import {Repayment} from '../models/repayment';
+const loans = require('../models/loans');
+const repayments = require('../models/repayments');
+const _loan = require('../models/loan');
+const _repayment = require('../models/repayment');
 
 // create loan
-export const create = function(req, res){
+exports.create = function(req, res){
+    let Loan = _loan.Loan;
     let loan = new Loan();
     Object.assign(loan, req.body);
     // check if requesting client has a current loan
@@ -20,7 +21,7 @@ export const create = function(req, res){
 };
 
 // get all, current or repaid loans
-export const list = function(req, res){
+exports.list = function(req, res){
     let selection;
     if(req.query.status){
         // convert string status representation inquery to boolean
@@ -34,7 +35,7 @@ export const list = function(req, res){
 };
 
 // get specific loan details
-export const detail = function(req, res){
+exports.detail = function(req, res){
     let loan = loans.find((target) => target._id == req.params.loanId);
     if(!loan){
         res.status(404).json({status: 404, error: `loan with id ${req.params.loanId} does not exist`});
@@ -44,7 +45,7 @@ export const detail = function(req, res){
 };
 
 // approve a loan
-export const approve = function(req, res){
+exports.approve = function(req, res){
     let loan = loans.find((one) => one._id == req.params.loanId);
     if(!loan){
         res.status(404).json({status: 404, error: `no loan with id ${req.params.loanId}`});
@@ -55,7 +56,7 @@ export const approve = function(req, res){
 };
 
 // post a repayment installment
-export const repay = function(req, res){
+exports.repay = function(req, res){
     let loan = loans.find(one => one._id == req.params.loanId);
     if(!loan){
         res.status(404).json({status: 404, error: `no loan with id ${req.params.loanId}`});
@@ -67,6 +68,7 @@ export const repay = function(req, res){
         res.status(403).json({status: 403, error: 'loan already fully serviced!'});
     }
     else {
+        let Repayment = _repayment.Repayment;
         let repayment = new Repayment();
         Object.assign(repayment, {amount: req.body.amount, loanId: req.params.loanId});
         repayment.updateLoan(loan);
@@ -76,7 +78,7 @@ export const repay = function(req, res){
 };
 
 // get repaymnt history
-export const log = function(req, res){
+exports.log = function(req, res){
     if(!loans.find(one => one._id == req.params.loanId)){
         res.status(404).json({status: 404, error: `loan ${req.params.loanId} not found`});
     } else {

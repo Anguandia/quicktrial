@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import user_controller from '../controllers/userController';
-// import validation from '../utils/validation';
+const user_controller = require('../controllers/userController');
+// const validation = require('../utils/validation');
 
 /* GET users' listing. */
 router.get('/', user_controller.user_list);
@@ -10,9 +10,9 @@ router.get('/', user_controller.user_list);
 router.patch('/:email/verify', user_controller.update);
 
 //post request for deleting a user
-router.delete('/:email', user_controller.del);
+router.delete('/:email', user_controller.delete);
 
 //route to display a particular user's details
 router.get('/:email', user_controller.details);
 
-export default router;
+module.exports = router;

@@ -1,20 +1,20 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import loan_controller from '../controllers/loanController';
-import validation from '../utils/validation';
-// import auth from '../utils/auth';
+const loan_controller = require('../controllers/loanController');
+const validation = require('../utils/validation');
+const auth = require('../utils/auth');
 
 // post request for creating a loan
-router.post('/', validation.validate, loan_controller.create);
+router.post('/', auth.authClient, validation.validate, loan_controller.create);
 
 // post request for loan repayment
-router.post('/:loanId/repayment', validation.validate, loan_controller.repay);
+router.post('/:loanId/repayment', auth.authAdmin, validation.validate, loan_controller.repay);
 
 // approve or reject a loan application
-router.patch('/:loanId', validation.validate, loan_controller.approve);
+router.patch('/:loanId', auth.authAdmin, validation.validate, loan_controller.approve);
 
 // get a specific loan
-router.get('/:loanId', loan_controller.detail);
+router.get('/:loanId', auth.authOwner, loan_controller.detail);
 
 // get all current loans
 // router.get('/?status=approved&repaid=false', loan_controller.selection);
@@ -28,4 +28,4 @@ router.get('/', loan_controller.list);
 // get a specific loan's repayment history
 router.get('/:loanId/repayments', loan_controller.log);
 
-export default router;
+module.exports = router;

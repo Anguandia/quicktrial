@@ -1,6 +1,6 @@
-import repayments from './repayments';
+let repayments = require('./repayments');
 
-export const Repayment = class Repayment{
+exports.Repayment = class Repayment{
     // create repayment object with the given defaults
     constructor(loanId, amount, createdOn=new Date()){
         this.loanId = loanId;
@@ -51,7 +51,7 @@ export const Repayment = class Repayment{
 };
 
 // define and export valid repayment property specifications to be validated against
-export const specs = {
+exports.specs = {
     'id' : 'integer',
     'tenor' : 'integer',
     'loanId' : 'string',
@@ -65,14 +65,14 @@ export const specs = {
 };
 
 // declare and export required repayment fields for given routes for use in validation
-export const signup = [
+exports.signup = [
     'tenor', 'loanId', 'amount', 'paymentInstallment', 'address',
 ];
 
-export const signin = [
+exports.signin = [
     'tenor', 'paymentInstallment'
 ];
 
-export const verify = [
+exports.verify = [
     'tenor', 'paidAmount'
 ];
