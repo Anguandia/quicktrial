@@ -55,7 +55,7 @@ import logger from 'morgan';
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
 import usersRouter from './routes/users';
-import loansRouter from './routes/loans'
+import loansRouter from './routes/loans';
 // var auth = require('../utils/auth');
 
 const app = express();
