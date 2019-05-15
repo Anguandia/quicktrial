@@ -50,12 +50,12 @@
 const express = require('express');
 // var path = require('path');
 // var cookieParser = require('cookie-parser');
-import logger from 'morgan';
+const logger = require('morgan');
 
-import indexRouter from './routes/index';
-import authRouter from './routes/auth';
-import usersRouter from './routes/users';
-import loansRouter from './routes/loans';
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+const loansRouter = require('./routes/loans');
 // var auth = require('../utils/auth');
 
 const app = express();
