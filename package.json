@@ -2,6 +2,9 @@
   "name": "quicktrial",
   "version": "0.0.0",
   "main": "app.js",
+  "babel": {
+    "presets": ["env"]
+  },
   "scripts": {
     "test": "mocha --require babel-register tests/*.js --exit",
     "dev": "nodemon --exec babel-node --presets babel-preset-env ./app.js",
