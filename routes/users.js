@@ -10,7 +10,7 @@ router.get('/', user_controller.user_list);
 router.patch('/:email/verify', user_controller.update);
 
 //post request for deleting a user
-router.delete('/:email', user_controller.delete);
+router.delete('/:email', user_controller.del);
 
 //route to display a particular user's details
 router.get('/:email', user_controller.details);

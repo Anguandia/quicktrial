@@ -8,4 +8,5 @@ let user = users.find((target) => target === 'x');
 // console.log(/loans/.test('/users?ishjhkjh'));
 let x ={name: 'mike', sex: 'm', age:50};
 let y = (({name, age})=>({name, age}))(x);
-console.log(y);
+// console.log([/users/,/loans/,/errors/].some((f) => f.test('/api/v1/errors')));
+console.log(typeof('mike')=='string');

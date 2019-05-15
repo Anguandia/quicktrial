@@ -38,4 +38,4 @@ let users = [
 ];
 
 
-module.exports = users;
+export default users;

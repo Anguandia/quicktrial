@@ -1,6 +1,6 @@
-let loans = require('./loans');
+import loans from './loans';
 
-exports.Loan = class Loan{
+export const Loan = class Loan{
     // create loan object with the given defaults
     constructor(user, amount, tenor, balance=0, interest=0.05,
         createdOn=new Date(), status='pending', repaid=false
@@ -76,11 +76,8 @@ exports.Loan = class Loan{
     }
 };
 
-// declare empty array to store loans
-exports.loans = [];
-
 // define and export valid Loan property specifications to be validated against
-exports.specs = {
+export const specs = {
     'id' : 'Integer',
     'tenor' : 'Integer',
     'user' : 'string',
@@ -94,14 +91,14 @@ exports.specs = {
 };
 
 // declare and export required Loan fields for given routes for use in validation
-exports.loan = [
+export const loan = [
     'tenor', 'user', 'amount'
 ];
 
-exports.payment = [
+export const payment = [
     'amount', 'loanId'
 ];
 
-exports.approve = [
+export const approve = [
     'status'
 ];

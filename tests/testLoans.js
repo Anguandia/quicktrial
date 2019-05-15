@@ -1,20 +1,18 @@
 /* eslint-disable no-undef */
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let app = require('../app');
-let should = chai.should();
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../app';
+const should = chai.should();
 
-let loans = require('../models/loan.js');
-let testData = require('./testData');
-let testloans = testData.testLoans;
-let testpayments = testData.test_repayments;
+import loans from '../models/loan.js';
+import {testLoans as testloans, test_repayments as testpayments} from './testData';
 
 chai.use(chaiHttp);
 
 describe('test loans', () => {
     beforeEach((done) => {
         // setup; before each individual test, creat an empty loan's array
-        chai.request(app).post('/api/v1/loans').send(testloans[0]).end();
+        // chai.request(app).post('/api/v1/loans').send(testloans[0]).end();
         done();
     });
     describe('POST /api/v1/loans', () => {
@@ -35,8 +33,9 @@ describe('test loans', () => {
                     done();
                 });
             });
-            describe.skip('Test input validation', () => {
-                it('should fail creation - missing field', (done) => {
+            describe('Test input validation', () => {
+                it('should fail creation - missing field',
+                (done) => {
                     // test registration fails if no email provided
                     delete testloans[1].amount;
                     chai.request(app)
@@ -48,13 +47,13 @@ describe('test loans', () => {
                         done();
                     });
                 });
-                it('should fail - invalid loan data', (done) => {
+                it.skip('should fail - invalid loan data', (done) => {
                     // test registration fails if invalid amount provided
                     // submit loan application with a string amount instead of number
-                    Object.assign(testloans[1], {amount: 'ten thousand'});
+                    Object.assign(testloans[2], {amount: 'ten thousand'});
                     chai.request(app)
                     .post('/api/v1/loans')
-                    .send(testloans[1])
+                    .send(testloans[2])
                     .end((err, res) => {
                         res.should.have.status(400);
                         res.body.status.should.eql(400);
@@ -88,7 +87,7 @@ describe('test loans', () => {
                 });
                 });
             });
-        describe.skip('post repayment', () => {
+        describe('post repayment', () => {
             it('should create repayment', (done) => {
                 let repayment = testpayments[0];
                 chai.request(app)
@@ -190,7 +189,8 @@ describe('test loans', () => {
                 done();
             });
         });
-        it.skip('should return repayment history of specified loac', (err, res) => {
+        it('should return repayment history of specified loac',
+        (err, res) => {
             let loan_id = 1;
             chai.request(app)
             .get(`/api/v1/loans/${loan_id}/repayments`)
@@ -218,7 +218,7 @@ describe('test loans', () => {
             });
         });
         describe('should fail update, flag errors', () => {
-            it.skip('should fail to update if invalid status', (done) => {
+            it('should fail to update if invalid status', (done) => {
                 let loan_id = 1;
                 chai.request(app)
                 .patch(`/api/v1/loans/${loan_id}`)

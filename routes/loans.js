@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const loan_controller = require('../controllers/loanController');
 const validation = require('../utils/validation');
+// const auth = require('../utils/auth');
 
 // post request for creating a loan
 router.post('/', validation.validate, loan_controller.create);

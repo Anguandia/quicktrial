@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let app = require('../app');
-let should = chai.should();
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../app';
+const should = chai.should();
 
-let users = require('../models/users');
-let testData = require('./testData');
-let testUsers = testData.test_users;
+import users from '../models/users';
+import {test_users as testUsers} from './testData';
 
 chai.use(chaiHttp);
 
@@ -14,7 +13,7 @@ describe('test user end points', () => {
     beforeEach((done) => {
         // create three test users for each test
         // testUsers.forEach((user) => chai.request(app).post('/api/v1/auth/signup').send(user).end());
-        users.slice();
+        users.splice(0);
         chai.request(app).post('/api/v1/auth/signup').send(testUsers[0]).end();
         // setup; before each individual test, creat an empty user's array
         // users.slice();
@@ -50,7 +49,7 @@ describe('test user end points', () => {
         });
         it('should return a single user object', (done) => {
             // test get single user
-            const email = 'user1@mail.com';
+            let email = 'user1@mail.com';
             chai.request(app)
             .get(`/api/v1/users/${email}`)
             .end((err, res) => {
@@ -106,7 +105,7 @@ describe('test user end points', () => {
                 });
             });
             describe('Registration should fail', () => {
-                it.skip('should fail registration - no email', (done) => {
+                it('should fail registration - no email', (done) => {
                     // test registration fails if no email provided
                     delete testUsers[0].email;
                     chai.request(app)
@@ -130,7 +129,7 @@ describe('test user end points', () => {
                         done();
                     });
                 });
-                it.skip('should fail - invalid/missing field(emai)', (done) => {
+                it('should fail - invalid/missing field(emai)', (done) => {
                     // test registration fails if invalid email provided
                     // replace the keyname email with emai
                     // delete Object.assign(testUsers[0], {emai: testUsers[0].email}).email;
